@@ -1,11 +1,10 @@
 import { Express } from 'express';
 import householdRoutes from './household/routes';
+import incomeStatementRoutes from './income-statement/routes';
 
 function routes(app: Express) {
   app.use('/household', householdRoutes);
-  app.use('/household2', (req, res) => {
-    return res.send('household2');
-  });
+  app.use('/income-statement', incomeStatementRoutes);
 }
 
 export default routes;

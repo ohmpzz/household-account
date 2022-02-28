@@ -1,6 +1,6 @@
 import { Schema, model, Types, Document } from 'mongoose';
 
-export type IncomeStatmentType =
+export type IncomeStatementType =
   | 'income'
   | 'fixed expenses'
   | 'variable expenses'
@@ -21,8 +21,8 @@ export type IncomeStatementMonthly = {
   december: number;
 };
 
-export interface IncomeStatmentDocument extends Document {
-  type: IncomeStatmentType;
+export interface IncomeStatementDocument extends Document {
+  type: IncomeStatementType;
   title: string;
   income_statement_monthly: IncomeStatementMonthly;
 }
@@ -42,18 +42,18 @@ const incomeStatementSchema = new Schema(
     },
     title: { type: Schema.Types.String, required: true, maxlength: 100 },
     income_statement_monthly: {
-      january: { type: Schema.Types.Number, required: true },
-      february: { type: Schema.Types.Number, required: true },
-      march: { type: Schema.Types.Number, required: true },
-      april: { type: Schema.Types.Number, required: true },
-      may: { type: Schema.Types.Number, required: true },
-      june: { type: Schema.Types.Number, required: true },
-      july: { type: Schema.Types.Number, required: true },
-      august: { type: Schema.Types.Number, required: true },
-      september: { type: Schema.Types.Number, required: true },
-      october: { type: Schema.Types.Number, required: true },
-      november: { type: Schema.Types.Number, required: true },
-      december: { type: Schema.Types.Number, required: true },
+      january: { type: Schema.Types.Number, default: 0 },
+      february: { type: Schema.Types.Number, default: 0 },
+      march: { type: Schema.Types.Number, default: 0 },
+      april: { type: Schema.Types.Number, default: 0 },
+      may: { type: Schema.Types.Number, default: 0 },
+      june: { type: Schema.Types.Number, default: 0 },
+      july: { type: Schema.Types.Number, default: 0 },
+      august: { type: Schema.Types.Number, default: 0 },
+      september: { type: Schema.Types.Number, default: 0 },
+      october: { type: Schema.Types.Number, default: 0 },
+      november: { type: Schema.Types.Number, default: 0 },
+      december: { type: Schema.Types.Number, default: 0 },
     },
   },
   {
@@ -62,7 +62,7 @@ const incomeStatementSchema = new Schema(
   }
 );
 
-export default model<IncomeStatmentDocument>(
+export default model<IncomeStatementDocument>(
   'incomeStatement',
   incomeStatementSchema
 );
