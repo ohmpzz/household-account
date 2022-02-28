@@ -21,6 +21,14 @@ export type IncomeStatementMonthly = {
   december: number;
 };
 
+export type Month = keyof IncomeStatementMonthly;
+
+export interface IncomeStatementDocumentLean {
+  type: IncomeStatementType;
+  title: string;
+  income_statement_monthly: IncomeStatementMonthly;
+}
+
 export interface IncomeStatementDocument extends Document {
   type: IncomeStatementType;
   title: string;

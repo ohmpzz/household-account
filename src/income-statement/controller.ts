@@ -1,11 +1,19 @@
 import { Request, Response } from 'express';
+import * as Service from './service';
+import { IncomeStatement } from './types';
 
 // todo ดึงข้อมูลทั้งหมด
 export async function GetAllIncomeStatementHandler(
   req: Request,
   res: Response
 ) {
-  return res.send('hi ');
+  try {
+    const docs = await Service.findIncomeStatement({});
+  } catch {
+    return res
+      .status(500)
+      .json({ code: 'income-statment/something-went-wrong' });
+  }
 }
 
 // todo ดึงข้อมูลตาม params.id
