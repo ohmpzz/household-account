@@ -3,6 +3,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import compression from 'compression';
+import routes from './routes';
 
 export const app = express();
 
@@ -19,5 +20,6 @@ app.use(
 );
 
 // routes
+routes(app);
 
 export default app;
