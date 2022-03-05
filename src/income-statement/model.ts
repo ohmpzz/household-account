@@ -71,6 +71,6 @@ const incomeStatementSchema = new Schema(
 );
 
 export default model<IncomeStatementDocument>(
-  'incomeStatement',
+  'income_statements',
   incomeStatementSchema
 );

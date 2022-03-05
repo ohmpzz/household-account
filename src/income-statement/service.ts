@@ -1,10 +1,6 @@
 import model, { IncomeStatementDocument } from './model';
-import {
-  DocumentDefinition,
-  FilterQuery,
-  QueryOptions,
-  UpdateQuery,
-} from 'mongoose';
+import { FilterQuery, QueryOptions, UpdateQuery } from 'mongoose';
+import { CreateIncomeStatementBody } from './schema';
 
 export function findIncomeStatement(
   query: FilterQuery<IncomeStatementDocument>,
@@ -17,14 +13,10 @@ export function findOneIncomeStatement(
   query: FilterQuery<IncomeStatementDocument>,
   options: QueryOptions = { lean: true }
 ) {
-  return model.findOne(query, [], options);
+  return model.findOne(query, {}, options);
 }
 
-export function createIncomeStatement(
-  payload: DocumentDefinition<
-    Omit<IncomeStatementDocument, 'created_at' | 'updated_at'>
-  >
-) {
+export function createIncomeStatement(payload: CreateIncomeStatementBody) {
   return model.create(payload);
 }
 
@@ -33,7 +25,7 @@ export function updateIncomeStatement(
   update: UpdateQuery<
     Omit<IncomeStatementDocument, 'created_at' | 'updated_at'>
   >,
-  options: QueryOptions = { lean: true }
+  options: QueryOptions = { lean: true, new: true }
 ) {
   return model.findOneAndUpdate(query, update, options);
 }

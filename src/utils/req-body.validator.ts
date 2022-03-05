@@ -1,11 +1,14 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import * as yup from 'yup';
 import { ValidationError } from 'yup';
 
 export function ReqBodyValidator(schema: yup.AnyObjectSchema) {
-  return async (req: Request, res: Response, next: Function) => {
+  return async (req: Request, res: Response, next: NextFunction) => {
     try {
       const data = await schema.validate(req.body);
+      if (Object.keys(data).length === 0) {
+        throw 'empty';
+      }
       req.body = data;
       return next();
     } catch (e) {
