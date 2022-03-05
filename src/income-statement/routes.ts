@@ -1,24 +1,35 @@
 import { Router } from 'express';
 import * as Controller from './controller';
 import * as Schema from './schema';
-import { ReqBodyValidator } from 'utils/req-body.validator';
+import { ValidateResource } from '../utils/validate-resource';
 
 export const router = Router();
 
 router.get('/', Controller.GetAllIncomeStatementHandler);
-router.get('/:id', Controller.GetOneIncomeStatementHandler);
+router.get(
+  '/:id',
+  ValidateResource({ params: Schema.getOneParamSchema }),
+  Controller.GetOneIncomeStatementHandler
+);
 
 router.post(
   '/',
-  ReqBodyValidator(Schema.createSchema),
+  ValidateResource({ body: Schema.createSchema }),
   Controller.CreateIncomeStatementHandler
 );
 router.patch(
   '/:id',
-  ReqBodyValidator(Schema.updateSchema),
+  ValidateResource({
+    params: Schema.updateParamSchema,
+    body: Schema.updateSchema,
+  }),
   Controller.UpdateIncomeStatementHandler
 );
 
-router.delete('/:id', Controller.DeleteIncomeStatementHandler);
+router.delete(
+  '/:id',
+  ValidateResource({ params: Schema.deleteParamSchema }),
+  Controller.DeleteIncomeStatementHandler
+);
 
 export default router;

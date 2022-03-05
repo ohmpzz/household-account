@@ -246,7 +246,7 @@ const incomeStatement: IncomeStatement = {
 };
 
 describe('make income statment', () => {
-  test('should return correct pattern ', () => {
+  it('should return the correct pattern ', () => {
     const data = makeIncomeStatement(incomeStatementDocuments);
     expect(data).toEqual(incomeStatement);
   });
